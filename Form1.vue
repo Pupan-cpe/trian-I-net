@@ -36,13 +36,6 @@
             required
           />
 
-          <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            label="E-mail"
-            required
-          />
-
           <v-select
             v-model="select"
             :items="items"
@@ -127,17 +120,20 @@
               sm="1"
               md="1"
             >
-              <v-checkbox
-
-                v-model="includeFiles"
-                label="อื่นๆ"
-                color="orange"
-                value="other"
-                input=""
-                :rules="checkboxRules"
-                hide-details
-              />
-              <v-text-field label=" " />
+              <v-card-text>
+                <v-row align="center">
+                  <v-checkbox
+                    v-model="enabled"
+                    label="Other"
+                    hide-details
+                    class="shrink mr-2 mt-0"
+                  />
+                  <v-text-field
+                    :disabled="!enabled"
+                    label=" "
+                  />
+                </v-row>
+              </v-card-text>
             </v-col>
           </v-row>
 
@@ -176,16 +172,20 @@
   </v-card>
 </template>
 <script>
-
+  import ThailandAutoComplete from 'vue-thailand-address-autocomplete'
   export default {
 
     data: () => ({
+      components: {
+        ThailandAutoComplete,
+      },
       district: '',
       amphoe: '',
       province: '',
       zipcode: '',
+
       valid: true,
-      includeFiles: true,
+      enabled: false,
       id: '',
       idRules: [
         v => !!v || 'กรุณากรอกเลขบัตรประจำตัวประชาชน',
@@ -199,11 +199,7 @@
         v => !!v || 'Name is required',
         v => (v && v.length <= 10) || 'Name must be less than 10 characters',
       ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid',
-      ],
+
       select: null,
       items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
       checkbox: false,
