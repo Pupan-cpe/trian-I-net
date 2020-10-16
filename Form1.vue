@@ -1,7 +1,9 @@
 <template>
   <v-card style="width:60%; margin-left:20%;">
     <p1 style="centered">
-      ข้อมูลฟาร์ม
+      <b>
+        ข้อมูลฟาร์ม
+      </b>
     </p1>
     <v-card>
       <v-container>
@@ -136,14 +138,18 @@
               </v-card-text>
             </v-col>
           </v-row>
-
-          <v-text-field
-            v-model="idfarm"
-            label="ที่อยู่"
-            required
-          />
-
-          <!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+          <v-col
+            cols="12"
+            sm="6"
+            md="6"
+          >
+            <v-text-field
+              v-model="idfarm"
+              label="ที่อยู่"
+              required
+            />
+            <br>
+          </v-col>
         </v-form>
       </v-container>
     </v-card>
